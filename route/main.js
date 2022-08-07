@@ -23,6 +23,7 @@ app.post('/login',async(req,res)=>{
   res.status(200).send({token})
   } catch (e) {
     res.status(500).send({msg:e})
+    console.log(e)
   }
 })
 //create an candident
@@ -67,5 +68,18 @@ app.post('/find',async(req,res)=>{
     console.log(e)
   }
 })
-
+//get all cat detels
+app.get('/cat',async(req,res)=>{
+  try {
+  let data=await art.find({})
+  let a=data.filter((n)=>n.group=='>4')
+  let b=data.filter((n)=>n.group=='5-7')
+  let c=data.filter((n)=>n.group=='8-10')
+  let d=data.filter((n)=>n.group=='10-above')
+  res.status(200).send({a:a.length,
+  b:b.length,
+  c:c.length,
+  d:d.length})
+  } catch (e) {}
+})
 export default app
